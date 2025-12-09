@@ -1,12 +1,12 @@
-document.getElementById('random-back').addEventListener('click', function(){
+document.getElementById('random-back').addEventListener('click', function () {
     window.location.href = 'front.html'
 })
 
-const quotes =[
+const quotes = [
     "The only thing we have to fear is fear itself",
-    "The only way to do great work is to love what you do." ,
+    "The only way to do great work is to love what you do.",
     "You must be the change you wish to see in the world.",
-    "It always seems impossible until it's done." ,
+    "It always seems impossible until it's done.",
     "Do what you can, with what you have, where you are.",
     "Imagination is more important than knowledge.",
     "To be, or not to be: that is the question.",
@@ -17,8 +17,20 @@ const quotes =[
 const usedIndexes = new Set()
 const quoteElement = document.getElementById('quote')
 
-function generateQuote(){
-    const randomIdx = Math.floor(Math.random() * quotes.length )
-    const quote = quotes[randomIdx];
-    quoteElement.innerHTML = quote;
+function generateQuote() {
+    if(usedIndexes.size >= quotes.length){
+        usedIndexes.clear()
+    }
+    while (true) {
+        const randomIdx = Math.floor(Math.random() * quotes.length)
+
+        if(usedIndexes.has(randomIdx)) continue
+
+
+        const quote = quotes[randomIdx];
+        quoteElement.innerHTML = quote;
+        usedIndexes.add(randomIdx)
+        break
+    }
+
 }
